@@ -1,74 +1,99 @@
-🏰 Coach World – $CJC Coin
+# 🏰 Coach World – $CJC Coin
 
+![Coach World Logo](https://via.placeholder.com/250x80.png?text=Coach+World+Logo)  
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)  
+[![Solana Devnet](https://img.shields.io/badge/Blockchain-Solana%20Devnet-blue)](https://solana.com/)  
+[![Web Test](https://img.shields.io/badge/Web-Test-GitHub%20Pages-orange)](https://pages.github.com/)
 
+$CJC Coin will be available on **InterLink Layer 1 blockchain**. Coach World is a **Clash-of-Clans-style blockchain game** where players **train mentors, build bases, complete quests, battle other players, and earn $CJC rewards**.
 
+> [!NOTE]
+> If you're new to blockchain games, you don’t need to deploy a full smart contract just to test $CJC or mint NFTs. Use the Solana Devnet and existing programs for token management, NFT minting, and transactions.
 
+---
 
-$CJC Coin will be available on InterLink Layer 1 blockchain and will serve as the official in-game currency of Coach World.
+## ⚡ Features Overview
 
-Coach World is a Clash-of-Clans-style blockchain game where players train mentors, build and upgrade their bases, complete quests, battle other players, and earn $CJC rewards. The game combines strategy, blockchain, and NFTs to create a unique play-to-earn ecosystem.
+Each folder in this repo contains examples and starter scripts for one or more of the following features:
 
-🎯 Project Overview
+- `$CJC Token` – Coach Joel Coin, the stable in-game currency.  
+- `Mentor NFTs` – Mint, upgrade, and trade mentor NFTs.  
+- `Marketplace` – Buy/sell mentors using $CJC.  
+- `Base Building` – Build and upgrade your academy/base.  
+- `Staking & Rewards` – Stake $CJC and earn rewards.  
+- `Web & Unity Integration` – Web demo via React.js and optional Unity WebGL gameplay.
 
-Game Type: Strategy / Base-Building (PvP & PvE)
+---
 
-Token: Coach Joel Coin ($CJC) – Stable in-game currency
+## 🪄 $CJC Token
 
-Blockchain: Solana Devnet (for testing), InterLink Layer 1 (mainnet)
+<details>
+  <summary>Details & Starter Examples</summary>
 
-Core Features:
+$CJC is the core currency of Coach World. It can be earned in-game, staked, or used in the marketplace.  
 
-$CJC – Coach Joel Coin
+Starter scripts for minting and transferring $CJC:
 
-Stable in-game currency used for all transactions.
+- **Mint $CJC (Anchor)**: [anchor](./blockchain/cjc/anchor)  
+- **Mint $CJC (Native Rust)**: [native](./blockchain/cjc/native)  
+- **Transfer $CJC**: [anchor](./blockchain/cjc/transfer-anchor) [native](./blockchain/cjc/transfer-native)
 
-Earn $CJC through quests, PvP battles, and staking.
+</details>
 
-Can be exchanged with other cryptocurrencies (testnet only for web/demo).
+---
 
-Mentor NFTs
+## 🧑‍🏫 Mentor NFTs
 
-Players can mint, upgrade, and assign mentors to their academy/base.
+<details>
+  <summary>Mint, upgrade, and trade mentor NFTs</summary>
 
-Mentors have unique attributes, skills, and rarity levels.
+Mentors have unique skills and rarity. You can mint them using the **Metaplex Token Metadata Program**.
 
-NFTs can be traded in the marketplace using $CJC.
+- **NFT Minter (Anchor)**: [anchor](./blockchain/mentor-nft/anchor)  
+- **NFT Minter (Native)**: [native](./blockchain/mentor-nft/native)  
 
-Base Building
+Attributes can include: level, skill, rarity, and base assignment.  
 
-Build training halls, gyms, libraries, and resource generators.
+</details>
 
-Upgrade bases to unlock more mentors, quests, and PvP capabilities.
+---
 
-Marketplace
+## 🏠 Base Building
 
-Buy, sell, and trade mentor NFTs.
+<details>
+  <summary>Build and upgrade your academy/base</summary>
 
-Use $CJC as the currency for all marketplace transactions.
+Bases include training halls, gyms, libraries, and resource generators.
 
-Web-based interface supports wallet integration (Phantom / Solflare).
+- Upgrade scripts for base expansions: [anchor](./unity_game/base-upgrade/anchor)  
+- Optional Unity WebGL prefab examples: [unity](./unity_game/Prefabs)  
 
-Staking & Rewards
+</details>
 
-Stake $CJC to earn additional rewards over time.
+---
 
-Leaderboards track top players and mentors.
+## 💰 Marketplace & Staking
 
-PvP and PvE battles provide $CJC rewards.
+<details>
+  <summary>Buy/sell mentor NFTs and stake $CJC</summary>
 
-Web & Unity Integration
+- Web-based React marketplace: [frontend_marketplace](./frontend_marketplace)  
+- Staking scripts (devnet simulation): [anchor](./blockchain/staking/anchor)  
 
-Frontend: React.js marketplace with wallet support.
+Players can earn $CJC from quests, PvP battles, or staking.  
 
-Unity WebGL: Optional browser gameplay with mentor assignments, base management, and battle simulation.
+</details>
 
-🌐 Web Testing via GitHub
+---
 
-Frontend Marketplace: Connect wallets, display $CJC balances, and view mentor NFTs.
+## ⚙️ Setup & Testing
 
-NFT Metadata: Stored as JSON on GitHub or IPFS, fetched dynamically in the marketplace.
+<details>
+  <summary>Instructions</summary>
 
-Unity WebGL (Optional): Play base building, mentor management, and battles in the browser.
-
-⚠️ Full blockchain functionality (minting, staking, PvP rewards) requires Solana Devnet or InterLink Layer 1 deployment.
+### Frontend Web Test
+```bash
+cd frontend_marketplace
+npm install
+npm start
