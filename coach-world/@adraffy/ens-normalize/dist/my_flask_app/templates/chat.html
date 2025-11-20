@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coach Joel AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <img src="{{ url_for('static', filename='images/InterLinklogo.png') }}" alt="InterLink Logo" class="top-logo-small">
+      <span>Hello, {{ username }}</span>
+      <a href="{{ url_for('logout') }}" class="logout-btn">⎋ Logout</a>
+    </div>
+
+    <div class="chat-box" id="chat-box">
+      <div class="message bot">👋 Hi {{ username }}! Coach Joel AI here. How can I assist you today?</div>
+    </div>
+
+    <div class="input-area">
+      <input type="text" id="user-input" placeholder="Ask anything..." autocomplete="off">
+      <button id="mic-btn" title="Speak">🎙️</button>
+      <button id="send-btn">➤</button>
+    </div>
+  </div>
+
+  <script>
+    const sendBtn = document.getElementById("send-btn");
+    const userInput = document.getElementById("user-input");
+    const chatBox = document.getElementById("chat-box");
+    const micBtn = document.getElementById("mic-btn");
+
+    async function sendMessage() {
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      chatBox.innerHTML += `<div class="message user">${message}</div>`;
+      userInput.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      const res = await fetch("/send_message", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message })
+      });
+
+      const data = await res.json();
+      const botReply = data.reply;
+      chatBox.innerHTML += `<div class="message bot">${botReply} <button class="tts-btn" onclick="speakText('${botReply.replace(/'/g, "\\'")}')">🔊</button></div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    sendBtn.onclick = sendMessage;
+    userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") sendMessage(); });
+
+    // 🎤 Speech recognition (voice to text)
+    let recognition;
+    if ('webkitSpeechRecognition' in window) {
+      recognition = new webkitSpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        userInput.value = transcript;
+        sendMessage();
+      };
+    } else {
+      micBtn.disabled = true;
+      micBtn.title = "Speech recognition not supported";
+    }
+
+    micBtn.onclick = () => {
+      if (recognition) {
+        recognition.start();
+        micBtn.textContent = "🎧";
+        recognition.onend = () => { micBtn.textContent = "🎙️"; };
+      }
+    };
+
+    // 🔊 Text-to-Speech
+    function speakText(text) {
+      const synth = window.speechSynthesis;
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-US';
+      utter.rate = 1;
+      synth.speak(utter);
+    }
+  </script>
+</body>
+</html>
