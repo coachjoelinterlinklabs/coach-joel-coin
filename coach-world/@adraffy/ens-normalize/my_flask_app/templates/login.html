@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InterLink Chatbot Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="chat-container">
+    
+    <!-- Header Section -->
+    <div class="chat-header">
+      <div class="header-left">
+        <img src="{{ url_for('static', filename='images/InterLinklogo.png') }}" alt="InterLink Logo" class="header-logo">
+        <span class="header-title">InterLink Chatbot</span>
+      </div>
+      <div class="header-right">
+        <span class="minimize-icon">−</span>
+      </div>
+    </div>
+
+    <!-- Login Box -->
+    <div class="login-box">
+      <img src="{{ url_for('static', filename='images/coachjoeai.png') }}" alt="Coach Joel AI" class="bot-avatar">
+      <h2>👋 Hi there!</h2>
+      <p class="subtext">Login to get started</p>
+
+      <form method="POST">
+        <input type="text" name="interlink_id" placeholder="Enter your InterLink ID" required>
+        <button type="submit" class="login-btn">Login</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
